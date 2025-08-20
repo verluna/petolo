@@ -317,6 +317,7 @@
                     <div class="flex-shrink-0 mb-8 lg:mb-0 lg:border-r lg:pr-8 border-gray-200">
                         <div class="flex lg:flex-col space-x-2 lg:space-x-0 lg:space-y-2 overflow-x-auto pb-2">
                              <button data-target="tab-goals" class="tab-button w-full lg:w-48 text-left p-3 rounded-lg text-sm font-semibold transition-colors whitespace-nowrap active">Goal & KPIs</button>
+                             <button data-target="tab-setup" class="tab-button w-full lg:w-48 text-left p-3 rounded-lg text-sm font-semibold transition-colors whitespace-nowrap">Campaign Setup</button>
                              <button data-target="tab-targeting" class="tab-button w-full lg:w-48 text-left p-3 rounded-lg text-sm font-semibold transition-colors whitespace-nowrap">Targeting</button>
                              <button data-target="tab-creative" class="tab-button w-full lg:w-48 text-left p-3 rounded-lg text-sm font-semibold transition-colors whitespace-nowrap">Creative Ideas</button>
                              <button data-target="tab-measurement" class="tab-button w-full lg:w-48 text-left p-3 rounded-lg text-sm font-semibold transition-colors whitespace-nowrap">Measurement</button>
@@ -331,8 +332,39 @@
                                 <li>KPIs: CAC, CTR, CVR, churn %, LTV.</li>
                             </ul>
                         </div>
+                        <div id="tab-setup" class="tab-content hidden">
+                            <h4 class="text-xl font-bold text-petolo-dark mb-4">Campaign Structure & Budget</h4>
+                             <p class="text-sm text-gray-600 mb-4">The campaign will run across Meta and TikTok with a test budget of €5,000/month, split 60/40. The Meta budget will be further split between prospecting and retargeting.</p>
+                            <div class="space-y-4 text-sm">
+                                <div>
+                                    <h5 class="font-medium text-petolo-dark">Meta (€3,000/month)</h5>
+                                    <ul class="list-disc list-inside text-gray-600 mt-1">
+                                        <li>
+                                            <strong>Prospecting Campaign (CBO): €2,100 (70%)</strong>
+                                            <ul class="list-[circle] list-inside ml-4">
+                                                <li><strong>Ad Set 1:</strong> Lookalike Audience (from existing multi-pet customers).</li>
+                                                <li><strong>Ad Set 2:</strong> Interest Targeting (layered dog & cat interests).</li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <strong>Retargeting Campaign: €900 (30%)</strong>
+                                             <ul class="list-[circle] list-inside ml-4">
+                                                <li><strong>Ad Set 1:</strong> Retargeting (visitors of multi-pet pages, excludes existing customers).</li>
+                                             </ul>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <h5 class="font-medium text-petolo-dark">TikTok (€2,000/month)</h5>
+                                    <ul class="list-disc list-inside text-gray-600 mt-1">
+                                        <li><strong>Ad Group 1:</strong> Lookalike Audience.</li>
+                                        <li><strong>Ad Group 2:</strong> Hashtag & Interest Targeting.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
                         <div id="tab-targeting" class="tab-content hidden">
-                            <h4 class="text-xl font-bold text-petolo-dark mb-4">Targeting</h4>
+                            <h4 class="text-xl font-bold text-petolo-dark mb-4">Targeting Options</h4>
                             <ul class="space-y-2 text-sm text-gray-600 list-disc">
                                 <li>Lookalikes of existing multi-pet customers.</li>
                                 <li>Interests: multi-pet households, pet care subscriptions, pet accessories, dog food + cat food cross-interest.</li>
@@ -397,18 +429,10 @@
         tabButtons.forEach(button => {
             button.addEventListener('click', () => {
                 const targetId = button.dataset.target;
-
-                // Update button styles
                 tabButtons.forEach(btn => btn.classList.remove('active'));
                 button.classList.add('active');
-
-                // Update content visibility
                 tabContents.forEach(content => {
-                    if (content.id === targetId) {
-                        content.classList.remove('hidden');
-                    } else {
-                        content.classList.add('hidden');
-                    }
+                    content.classList.toggle('hidden', content.id !== targetId);
                 });
             });
         });
